@@ -16,4 +16,7 @@ Step for without user interactive.
 2) Use Blob to create URL file object that simulates a file on the web server
 3) Create an insivible anchor tag trigger download action once load pages
 
+For google chrome we can use window.URL.createObjectURL, however for microsoft edge it does not support URL.createObjectURL() to download.
+IE and Edge have their own APIs for creating and downloading files, which are called `msSaveBlob` or `msSaveOrOpenBlob`
+
 
