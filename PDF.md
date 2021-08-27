@@ -66,7 +66,13 @@ Add array to the VBA code.
 ### Setting argument for VirtualAlloc
 
 lpaddress - Set the value "0" which will leave the memory allocation to the API.  
+
+  
 DwSize - Can be hard coded the length of the payload, however need to change again, if another payload is used. To set it dynamically, use the *Ubound* to get the size of the array containing the shellcode.  
+
+  
 fkAllocationType - Set as *0x3000* which equates to the allocation type enums of **MEM_COMMIT** and **MEM_RESERVE**. This will make the OS allocate the desired memory for us and make it available. In VBA, this will be represented as &H3000.  
+
+  
 flProtect - set to &H40(0x40) indicating the memory is able to read write execute.  
 
