@@ -76,3 +76,17 @@ fkAllocationType - Set as *0x3000* which equates to the allocation type enums of
   
 flProtect - set to &H40(0x40) indicating the memory is able to read write execute.  
 
+### RtlMoveMemory
+
+Destination - Points to the newly allocated buffer.
+
+Source - address of an element from the shellcode array
+
+Length - the length of the source.
+
+### CreateThread.
+
+Most the argument in CreateThread are not needed and can set them to O.
+
+The third argument LPstartAddress is the start address for the code execution and must be the address of our shellcode buffer. 
+
