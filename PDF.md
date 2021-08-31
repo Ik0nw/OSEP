@@ -90,3 +90,86 @@ Most the argument in CreateThread are not needed and can set them to O.
 
 The third argument LPstartAddress is the start address for the code execution and must be the address of our shellcode buffer. 
 
+
+# Keep powershell in memory
+
+### Leveraging unSafeNativeMethods
+
+In windows powershell, there are three ways to interact with Windows API functions:
+
+1) Use the *Add-Type* cmdlet to compile c# code.
+2) get a reference to a private type in the .NET framework that calls the method
+3) **Use reflection to dynamically define a method that calls the Windows API function**
+
+**Our shellcode runner located the function, specified data types, and invoke the function.**
+
+2 Way for locate the function.
+
+One way is to locate functions in unmanged dynamic link libraries. The original technique based on *Add-Type* and *Dllimport*. However, this method calls the csc compiler, which writes to disk will trigger detection. we want to operate it in completely in-memory.
+
+Another way is known as dynamic lookup, Creates the .NET assembly in memory instead of writing code and compiling it.
+
+To perform dynamic lookup of function address, we need 2 special win32 APIs *GetModuleHandle* and *GetProcAddress*.
+
+*GetModuleHandle* gets the handle of the specified DLL.
+```
+[DllImport("kernel32")]
+public static extern int GetModuleHandle(string lpModuleName);
+```
+*GetProcAddress* will take the variable of the handle and output the memory address
+
+```
+FARPROC GetProcAddress(
+HMODULE hModule, // DLL模块句柄
+LPCSTR lpProcName // 函数名
+);
+```
+
+With these 2 function we are able to allocate any API.
+However with the above function, we must invoke them without using *Add-Type*
+
+```
+$Assemblies = [AppDomain]::CurrentDomain.GetAssemblies()
+
+$Assemblies |
+  ForEach-Object {
+    $_.GetTypes()|
+      ForEach-Object {
+          $_ | Get-Member -Static| Where-Object {
+            $_.TypeName.Contains('Unsafe')
+          }
+      } 2> $null
+    }
+ ```
+
+The *GetAssemblies* gets the preloaded assemblies in the powershell process.
+Each assemblies is a object, use a ForEach-Object to loop through all the object.
+Next we use *Get-Types* ifor reach object through the $_ (current object)
+
+when c# code want to directly invoke the WIN32 API, it must provide the Unsafe Keyword,
+Knowing this, we perform another *ForEach-Object* loop on all the discovered object and Invoke Get-Member cmdlet with the static flag to locate static properties or methods.
+
+However, it produce multiple result. But one of the Class *Microsoft.Win32.UnsafeNativeMethods* Class have both our wanted function *GetModuleHandle* and *GetProcAddress*
+we modify and search for the allocation and only the class
+
+```
+$Assemblies = [AppDomain]::CurrentDomain.GetAssemblies()
+
+$Assemblies |
+  ForEach-Object {
+    $_.Location
+    $_.GetTypes()|
+      ForEach-Object {
+          $_ | Get-Member -Static| Where-Object {
+            $_.TypeName.Equeals('Microsoft.Win32.UnsafeNativeMethods')
+          }
+      } 2> $null
+    }
+```
+
+![image](https://user-images.githubusercontent.com/48197340/131511978-e6c5bf59-df3c-4f89-9d71-757c556313e9.png)
+
+we are able to locate *GetModuleHandle* and *GetProcAddress*. However these methods are only meant to be used internally by the .NET code, this block us from calling them from powershell and C#.
+
+Therefore we have to call it indirectly.
+
