@@ -173,3 +173,14 @@ we are able to locate *GetModuleHandle* and *GetProcAddress*. However these meth
 
 Therefore we have to call it indirectly.
 
+The first step is to obtain a reference to these function, to do that, we have first obtain a reference to the System.dll assembly using the *GetType* method.  
+This reference will allow us to locate the *GetModuleHandler* and *GetProcAddress* method inside it
+
+```
+$systemdll = ([AppDomain]::CurrentDomain.GetAssemblies() | Where-Object { 
+  $_.GlobalAssemblyCache -And $_.Location.Split('\\')[-1].Equals('System.dll') })
+  
+$unsafeObj = $systemdll.GetType('Microsoft.Win32.UnsafeNativeMethods')
+```
+
+First Pipe the assemblies to Where-Object and filter on 2 condition. First is to filter out those not native assemblies as we only want preloaded powershell assemblies, next is we want to have the last keyword as *system.dll*
