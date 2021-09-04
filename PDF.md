@@ -332,9 +332,7 @@ WriteProcessMemory(hProcess, addr, buf, buf.Length, out outSize);
 
 ```
 [DllImport("kernel32.dll")]
-static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, 
-    uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, 
-        IntPtr lpThreadId);
+static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
 ```
 
 *CreateThread* does not support creation of remote process threads, rely on *CreateRemoteThread* instead
