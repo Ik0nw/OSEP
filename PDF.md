@@ -233,6 +233,11 @@ Create a new execution thread inside the remote process with *CreateRemoteThread
 
 ### OpenProcess API
 
+```csharp
+   [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+   static extern IntPtr OpenProcess(uint processAccess, bool bInheritHandle, int processId);
+```
+
 *OpenProcess* API opens an existing local process for interaction
  - *dwDeseiredAccess* established the access rights require on that process.
     - Every process have a *security descriptor* that specifies file permission of the executable and access rights of a user or group.
@@ -240,10 +245,55 @@ Create a new execution thread inside the remote process with *CreateRemoteThread
 
 In general, we can only inject code into processes running at the same or lower integrity level of the current process. This makes explorer.exe a prime target because it will always exist and does not exit until the user log offs.
 
+```
+HANDLE OpenProcess(
+  DWORD dwDesiredAccess,
+  BOOL  bInheritHandle,
+  DWORD dwProcessId
+);
+```
+
+- *dwDesiredAccess* is the access right we want to obtain for the remote process, its value will be checked against the security descriptor. We request for *PROCESS_ALL_ACCESS*(0x001F0FFF). Which gives the complete access to *explorer.exe*
+
+- *binheritHandle* decide whether or not created child process can inherit this handle. In our case we do not care and simply pass the value false.
+
+- *dwProcessID* is the process ID of process we want which is the explorer.exe, we can easily get it from process explorer.
+
+E.G.
+```csharp
+IntPr hProcess = OpenProcess(0x001F0FFF, false, 4804)
+```
+
 ### VirtualAllocEx API
 
 In the previous VirtualAlloc shellcode runner, used to locate memory for your shellcode. However this **only works in current process**.  
 *VirtualAllocEx* can perform actions in any process that we can have a valid handle to.
+
+```csharp
+[DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress, uint dwSize, uint flAllocationType, uint flProtect);
+```
+
+#### VirtualAllocEx argument
+
+```
+LPVOID VirtualAllocEx(
+  HANDLE hProcess,
+  LPVOID lpAddress,
+  SIZE_T dwSize,
+  DWORD  flAllocationType,
+  DWORD  flProtect
+);
+```
+
+- *hProcess* is the process handle to *explorer.exe* we obtained from *OpenProcess*
+- *lpAddress* is the desired address of the allocation in the remote process. If address given is already in use, the call will fail, it is better to pass in **null** value and let API select an unused address
+
+The last 3 argument is similar to *VirtualAlloc* API, specific the size of the allocation, the allocation type, and the memory protection. We would set as 0x1000, 0x3000 (MEM_COMMIT and MEM_RESERVE) and 0x40 (PAGE_EXECUTE_READWRITE).
+
+```csharp
+IntPtr addr = VirtualAllocEx(hProcess, IntPtr.Zero, 0x1000, 0x3000, 0x40);
+```
 
 ### WriteProcessMemory
 
