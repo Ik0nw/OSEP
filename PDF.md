@@ -237,3 +237,18 @@ Create a new execution thread inside the remote process with *CreateRemoteThread
  - *dwDeseiredAccess* established the access rights require on that process.
     - Every process have a *security descriptor* that specifies file permission of the executable and access rights of a user or group.
     - Every process have a *integrity level* that restricted acess to it. This works when blockng access to a higher integrity level, however access to a low level integrity level access is possible.
+
+In general, we can only inject code into processes running at the same or lower integrity level of the current process. This makes explorer.exe a prime target because it will always exist and does not exit until the user log offs.
+
+### VirtualAllocEx API
+
+In the previous VirtualAlloc shellcode runner, used to locate memory for your shellcode. However this **only works in current process**.  
+*VirtualAllocEx* can perform actions in any process that we can have a valid handle to.
+
+### WriteProcessMemory
+
+Allow to copy data into remote process. The previous *RtlMoveMemory* and c# methods do not support remote copy.
+
+## CreateRemoteThread
+
+*CreateThread* does not support creation of remote process threads, rely on *CreateRemoteThread* instead
