@@ -362,3 +362,60 @@ Accept 7 argument, but will ognore those aren't required.
 ```csharp
 IntPtr hThread = CreateRemoteThread(hProcess, IntPtr.Zero, 0, addr, IntPtr.Zero, 0, IntPtr.Zero);
 ```
+
+
+# Process Howlling Theory
+
+Calling CreateProcess API, the system did 3 things
+
+1) Creates the virtual memory space for the new process
+2) Allocates the stack along with the Thread Environment Block (TEB) and the process environment block (PEB)
+3) Loads the required DLLs and the EXE into memory.
+
+Once system finish these 3 steps, the OS will create a thread to execute the code, which will start at the EntryPoint of the executable, if we put in the *CREATE_SUSPENDED* flag when calling *CreateProcess*, the execution of the thread is halted just before it runs the EXE first instructions.
+
+Next, just allocate the EntryPoint of executable and overwrite it's memory content with shellcode and let it execute.
+
+Due to ASLR, the entrypoint maybe tricky, but suspended is createed. We can use WIN32 *ZwQueryInformationProcess* API to retrieve information about the target process, including PEB. From the PEB we can get the entrypoint.
+
+![image](https://user-images.githubusercontent.com/48197340/132227908-2a0bf59a-6fe5-4213-b5fe-13a6d3bbd3ab.png)
+
+The first step is to read the *e_lfanew* field at offset 0x3C.
+It contains the offset of the beginning of the PE file format header. Which is 0x80 Bytes in table.
+Once we have the PE headers, we are able to locate the EntryPoint Relative Virtual Address(RVA) located at the offset 0x28 from PE Header. And place the shellcode at the RVA.
+
+# CreateProcessW
+
+Use CreateProcessW because it allow to suspended the process
+
+```csharp
+[DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Ansi)]
+public static extern bool CreateProcess(string lpApplicationName, string lpCommandLine,IntPtr lpProcessAttributes, IntPtr lpThreadAttributes, bool bInheritHandles,uint dwCreationFlags, IntPtr lpEnvironment, string lpCurrentDirectory,[In] ref STARTUPINFO lpStartupInfo, out PROCESS_INFORMATIONlpProcessInformation);
+```
+
+*we have to include System.threading namespace*
+
+### Argument
+
+```
+BOOL CreateProcessW(
+  LPCWSTR               lpApplicationName,
+  LPWSTR                lpCommandLine,
+  LPSECURITY_ATTRIBUTES lpProcessAttributes,
+  LPSECURITY_ATTRIBUTES lpThreadAttributes,
+  BOOL                  bInheritHandles,
+  DWORD                 dwCreationFlags,
+  LPVOID                lpEnvironment,
+  LPCWSTR               lpCurrentDirectory,
+  LPSTARTUPINFOW        lpStartupInfo,
+  LPPROCESS_INFORMATION lpProcessInformation
+);
+```
+
+
+- *lpApplicationName* set to null
+- *lpCommandLine* set to the file path of scvhost.exe
+- lpProessAttributes set to null
+- lpThreadAttributes set to null
+- 
+
