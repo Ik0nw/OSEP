@@ -1,0 +1,14 @@
+\\192.168.1.81\visualstudio\cleanup\cleanup\bin\x64\Release\cleanup.exe.config
+\\192.168.1.81\visualstudio\cleanup\cleanup\bin\x64\Release\cleanup.exe
+\\192.168.1.81\visualstudio\cleanup\cleanup\bin\x64\Release\cleanup.pdb
+\\192.168.1.81\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.exe
+\\192.168.1.81\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.pdb
+\\192.168.1.86\visualstudio\cleanup\cleanup\bin\x64\Release\cleanup.exe.config
+\\192.168.1.86\visualstudio\cleanup\cleanup\bin\x64\Release\cleanup.exe
+\\192.168.1.86\visualstudio\cleanup\cleanup\bin\x64\Release\cleanup.pdb
+\\192.168.1.86\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.csproj.AssemblyReference.cache
+\\192.168.1.86\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.csproj.CoreCompileInputs.cache
+\\192.168.1.86\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.exe
+\\192.168.1.86\visualstudio\cleanup\cleanup\obj\x64\Release\cleanup.pdb

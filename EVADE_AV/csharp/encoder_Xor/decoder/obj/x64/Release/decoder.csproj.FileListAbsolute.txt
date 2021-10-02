@@ -1,0 +1,7 @@
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\bin\x64\Release\decoder.exe.config
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\bin\x64\Release\decoder.exe
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\bin\x64\Release\decoder.pdb
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\obj\x64\Release\decoder.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\obj\x64\Release\decoder.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\obj\x64\Release\decoder.exe
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\decoder\obj\x64\Release\decoder.pdb

@@ -1,0 +1,7 @@
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\bin\x64\Release\follow_the_link.exe.config
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\bin\x64\Release\follow_the_link.exe
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\bin\x64\Release\follow_the_link.pdb
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\obj\x64\Release\follow_the_link.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\obj\x64\Release\follow_the_link.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\obj\x64\Release\follow_the_link.exe
+\\192.168.1.81\visualstudio\follow_the_link\follow_the_link\obj\x64\Release\follow_the_link.pdb

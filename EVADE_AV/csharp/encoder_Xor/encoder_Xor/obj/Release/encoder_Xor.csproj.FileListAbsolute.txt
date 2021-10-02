@@ -1,0 +1,7 @@
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\bin\Release\encoder_Xor.exe.config
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\bin\Release\encoder_Xor.exe
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\bin\Release\encoder_Xor.pdb
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\obj\Release\encoder_Xor.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\obj\Release\encoder_Xor.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\obj\Release\encoder_Xor.exe
+\\192.168.1.81\visualstudio\EVADE_AV\csharp\encoder_Xor\encoder_Xor\obj\Release\encoder_Xor.pdb

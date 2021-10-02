@@ -1,0 +1,7 @@
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\obj\x64\Release\SQL_authentcation.csproj.AssemblyReference.cache
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\obj\x64\Release\SQL_authentcation.csproj.CoreCompileInputs.cache
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\bin\x64\Release\SQL_authentcation.exe.config
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\bin\x64\Release\SQL_authentcation.exe
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\bin\x64\Release\SQL_authentcation.pdb
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\obj\x64\Release\SQL_authentcation.exe
+\\192.168.1.86\visualstudio\SQL_authentcation\SQL_authentcation\obj\x64\Release\SQL_authentcation.pdb

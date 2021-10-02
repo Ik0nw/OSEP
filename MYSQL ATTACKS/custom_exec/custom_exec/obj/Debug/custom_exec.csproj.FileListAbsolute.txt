@@ -1,0 +1,6 @@
+\\192.168.1.81\visualstudio\custom_exec\custom_exec\obj\Debug\custom_exec.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\custom_exec\custom_exec\obj\Debug\custom_exec.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\custom_exec\custom_exec\bin\Debug\custom_exec.dll
+\\192.168.1.81\visualstudio\custom_exec\custom_exec\bin\Debug\custom_exec.pdb
+\\192.168.1.81\visualstudio\custom_exec\custom_exec\obj\Debug\custom_exec.dll
+\\192.168.1.81\visualstudio\custom_exec\custom_exec\obj\Debug\custom_exec.pdb

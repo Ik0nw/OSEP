@@ -1,0 +1,7 @@
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\bin\x64\Release\Privilege_escalation.exe.config
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\bin\x64\Release\Privilege_escalation.exe
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\bin\x64\Release\Privilege_escalation.pdb
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\obj\x64\Release\Privilege_escalation.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\obj\x64\Release\Privilege_escalation.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\obj\x64\Release\Privilege_escalation.exe
+\\192.168.1.81\visualstudio\Privilege_escalation\Privilege_escalation\obj\x64\Release\Privilege_escalation.pdb

@@ -1,0 +1,7 @@
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\obj\Debug\MS_SQL_UNC.csproj.AssemblyReference.cache
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\obj\Debug\MS_SQL_UNC.csproj.CoreCompileInputs.cache
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\bin\Debug\MS_SQL_UNC.exe.config
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\bin\Debug\MS_SQL_UNC.exe
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\bin\Debug\MS_SQL_UNC.pdb
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\obj\Debug\MS_SQL_UNC.exe
+\\192.168.1.86\visualstudio\MS_SQL_UNC\MS_SQL_UNC\obj\Debug\MS_SQL_UNC.pdb

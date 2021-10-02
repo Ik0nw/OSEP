@@ -1,0 +1,14 @@
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\bin\x64\Release\custom_sql_exe.exe.config
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\bin\x64\Release\custom_sql_exe.exe
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\bin\x64\Release\custom_sql_exe.pdb
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.exe
+\\192.168.1.81\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.pdb
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\bin\x64\Release\custom_sql_exe.exe.config
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\bin\x64\Release\custom_sql_exe.exe
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\bin\x64\Release\custom_sql_exe.pdb
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.csproj.AssemblyReference.cache
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.csproj.CoreCompileInputs.cache
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.exe
+\\192.168.1.86\visualstudio\custom_sql_exe\custom_sql_exe\obj\x64\Release\custom_sql_exe.pdb

@@ -1,0 +1,7 @@
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\bin\x64\Release\xp_cmd.exe.config
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\bin\x64\Release\xp_cmd.exe
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\bin\x64\Release\xp_cmd.pdb
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\obj\x64\Release\xp_cmd.csproj.AssemblyReference.cache
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\obj\x64\Release\xp_cmd.csproj.CoreCompileInputs.cache
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\obj\x64\Release\xp_cmd.exe
+\\192.168.1.81\visualstudio\xp_cmd\xp_cmd\obj\x64\Release\xp_cmd.pdb
